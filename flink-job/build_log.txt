@@ -1,0 +1,82 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.build
+#1 transferring dockerfile: 568B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/maven:3.9.5-eclipse-temurin-17
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/alpine:latest
+#3 DONE 0.5s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 2B done
+#4 DONE 0.0s
+
+#5 [build 1/6] FROM docker.io/library/maven:3.9.5-eclipse-temurin-17
+#5 DONE 0.0s
+
+#6 [stage-1 1/2] FROM docker.io/library/alpine:latest@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659
+#6 CACHED
+
+#7 [internal] load build context
+#7 transferring context: 619B 0.0s done
+#7 DONE 0.0s
+
+#8 [build 2/6] WORKDIR /app
+#8 CACHED
+
+#9 [build 3/6] COPY pom.xml .
+#9 CACHED
+
+#10 [build 4/6] RUN mvn dependency:go-offline || true
+#10 CACHED
+
+#11 [build 5/6] COPY src ./src
+#11 CACHED
+
+#12 [build 6/6] RUN mvn clean package -DskipTests -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.ignore.validity.dates=true
+#12 1.529 [INFO] Scanning for projects...
+#12 1.582 [INFO] 
+#12 1.582 [INFO] --------------------< com.rtsis:capital-aggregator >--------------------
+#12 1.583 [INFO] Building Realtime Capital Position — Flink Aggregator Job 1.0.0
+#12 1.583 [INFO]   from pom.xml
+#12 1.584 [INFO] --------------------------------[ jar ]---------------------------------
+#12 1.780 Downloading from central: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-clean-plugin/3.2.0/maven-clean-plugin-3.2.0.pom
+#12 1.969 [INFO] ------------------------------------------------------------------------
+#12 1.969 [INFO] BUILD FAILURE
+#12 1.969 [INFO] ------------------------------------------------------------------------
+#12 1.970 [INFO] Total time:  0.462 s
+#12 1.970 [INFO] Finished at: 2026-02-19T07:43:50Z
+#12 1.970 [INFO] ------------------------------------------------------------------------
+#12 1.971 [ERROR] Plugin org.apache.maven.plugins:maven-clean-plugin:3.2.0 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.maven.plugins:maven-clean-plugin:jar:3.2.0: The following artifacts could not be resolved: org.apache.maven.plugins:maven-clean-plugin:pom:3.2.0 (absent): Could not transfer artifact org.apache.maven.plugins:maven-clean-plugin:pom:3.2.0 from/to central (https://repo.maven.apache.org/maven2): PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target -> [Help 1]
+#12 1.971 [ERROR] 
+#12 1.971 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+#12 1.971 [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+#12 1.971 [ERROR] 
+#12 1.971 [ERROR] For more information about the errors and possible solutions, please read the following articles:
+#12 1.972 [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/PluginResolutionException
+#12 ERROR: process "/bin/sh -c mvn clean package -DskipTests -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.ignore.validity.dates=true" did not complete successfully: exit code: 1
+------
+ > [build 6/6] RUN mvn clean package -DskipTests -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.ignore.validity.dates=true:
+1.970 [INFO] Total time:  0.462 s
+1.970 [INFO] Finished at: 2026-02-19T07:43:50Z
+1.970 [INFO] ------------------------------------------------------------------------
+1.971 [ERROR] Plugin org.apache.maven.plugins:maven-clean-plugin:3.2.0 or one of its dependencies could not be resolved: Failed to read artifact descriptor for org.apache.maven.plugins:maven-clean-plugin:jar:3.2.0: The following artifacts could not be resolved: org.apache.maven.plugins:maven-clean-plugin:pom:3.2.0 (absent): Could not transfer artifact org.apache.maven.plugins:maven-clean-plugin:pom:3.2.0 from/to central (https://repo.maven.apache.org/maven2): PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target -> [Help 1]
+1.971 [ERROR] 
+1.971 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+1.971 [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+1.971 [ERROR] 
+1.971 [ERROR] For more information about the errors and possible solutions, please read the following articles:
+1.972 [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/PluginResolutionException
+------
+Dockerfile.build:11
+--------------------
+   9 |     # Copy source and build
+  10 |     COPY src ./src
+  11 | >>> RUN mvn clean package -DskipTests -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.ignore.validity.dates=true
+  12 |     
+  13 |     # Output stage
+--------------------
+ERROR: failed to solve: process "/bin/sh -c mvn clean package -DskipTests -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.ignore.validity.dates=true" did not complete successfully: exit code: 1

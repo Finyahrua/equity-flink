@@ -1,0 +1,18 @@
+{
+  "name": "capital-producer",
+  "version": "1.0.0",
+  "description": "Kafka producer simulator for Realtime Capital Position system",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@tabler/icons-react": "^3.36.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.34.2",
+    "kafkajs": "^2.2.4",
+    "lucide-react": "^0.574.0",
+    "tailwind-merge": "^3.5.0",
+    "uuid": "^9.0.0"
+  }
+}

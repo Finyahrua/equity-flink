@@ -1,0 +1,15 @@
+FROM maven:3.9.5-eclipse-temurin-17 AS build
+WORKDIR /app
+
+# Copy pom first for better caching
+COPY pom.xml .
+# Try to go offline to resolve dependencies
+RUN mvn dependency:go-offline || true
+
+# Copy source and build
+COPY src ./src
+RUN mvn clean package -DskipTests -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true -Dmaven.wagon.http.ssl.ignore.validity.dates=true
+
+# Output stage
+FROM alpine:latest
+COPY --from=build /app/target/capital-aggregator-1.0.0.jar /capital-aggregator.jar
