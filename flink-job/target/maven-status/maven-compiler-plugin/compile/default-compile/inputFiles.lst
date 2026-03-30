@@ -1,0 +1,5 @@
+/Users/FAJOHN/grounds/equity-flink/flink-job/src/main/java/com/rtsis/capital/CapitalAggregatorJob.java
+/Users/FAJOHN/grounds/equity-flink/flink-job/src/main/java/com/rtsis/capital/CapitalEvent.java
+/Users/FAJOHN/grounds/equity-flink/flink-job/src/main/java/com/rtsis/capital/CapitalEventDeserializer.java
+/Users/FAJOHN/grounds/equity-flink/flink-job/src/main/java/com/rtsis/capital/CapitalProcessFunction.java
+/Users/FAJOHN/grounds/equity-flink/flink-job/src/main/java/com/rtsis/capital/CapitalState.java

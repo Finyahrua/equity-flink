@@ -22,6 +22,8 @@ import java.sql.Timestamp;
  * 4. Aggregates statefully to maintain current totals
  * 5. Sinks updated totals into PostgreSQL via upsert
  */
+
+ 
 public class CapitalAggregatorJob {
 
     private static final Logger LOG = LoggerFactory.getLogger(CapitalAggregatorJob.class);
@@ -34,7 +36,9 @@ public class CapitalAggregatorJob {
         if (kafkaBrokers == null) kafkaBrokers = "localhost:9092";
 
         String dbUrl = System.getenv("DB_URL");
-        if (dbUrl == null) dbUrl = "jdbc:postgresql://host.docker.internal:5432/capital_db";
+        // if (dbUrl == null) dbUrl = "jdbc:postgresql://host.docker.internal:5432/postgres?currentSchema=capital_db";
+
+        if (dbUrl == null) dbUrl = "jdbc:postgresql://localhost:5432/capital_db";
 
         String dbUser = System.getenv("DB_USER");
         if (dbUser == null) dbUser = "postgres";
@@ -61,9 +65,16 @@ public class CapitalAggregatorJob {
 
         DataStream<CapitalState> resultStream = shareStream
                 .union(reserveStream, dividendStream, deductionStream)
+                .map(event -> {
+                    LOG.info("Consumed Kafka Event: {} - {} TZS", event.getSourceType(), event.getAmount());
+                    return event;
+                })
                 .keyBy(CapitalEvent::compositeKey)
                 .process(new CapitalProcessFunction())
                 .name("Capital Stateful Aggregator");
+
+        // Print the aggregated results to TaskManager stdout
+        resultStream.print().name("Stdout Print Sink");
 
         // ─── PostgreSQL Sink (Upsert) ───────────────────────────────────────
 

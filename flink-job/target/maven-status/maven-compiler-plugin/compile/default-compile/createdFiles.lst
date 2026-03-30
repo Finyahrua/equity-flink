@@ -1,0 +1,7 @@
+com/rtsis/capital/CapitalState.class
+com/rtsis/capital/CapitalProcessFunction.class
+com/rtsis/capital/CapitalEventDeserializer.class
+com/rtsis/capital/CapitalEvent$SourceType.class
+com/rtsis/capital/CapitalProcessFunction$1.class
+com/rtsis/capital/CapitalEvent.class
+com/rtsis/capital/CapitalAggregatorJob.class
